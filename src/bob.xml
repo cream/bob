@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration>
+    <pool id="default" path="/var/bob" />
+    <!--<repository id="cream" remote="git@github.com:cream/build-recipes.git" pool="default" />-->
+</configuration>
