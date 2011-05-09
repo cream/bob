@@ -10,6 +10,6 @@ Homepage: {{ url }}
 
 Package: {{ name }}
 Architecture: {% block architecture %}all{%endblock %}
-Depends: ${misc:Depends}, ${python:Depends}, {% block depends %}{% endblock %}
+Depends: ${misc:Depends}, ${python:Depends}, ${shlibs:Depends}, {% block depends %}{% endblock %}
 Description: {{ short_description }}
  {{ description }}
