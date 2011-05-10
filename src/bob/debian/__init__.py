@@ -21,17 +21,19 @@ class DebianPackage(bob.package.BasePackage):
 
         self.pkg_info['timestamp'] = time.strftime('%a, %d %b %Y %H:%M:%S +0100')
         self.pkg_info['ubuntu_release'] = self.options.ubuntu_release
+        self.pkg_info['ppa_release'] = self.options.ppa_release
 
-        self.pkg_name = '{0}-{1}-{2}'.format(self.pkg_info['name'],
-                                        self.pkg_info['version'],
-                                        self.pkg_info['release']
+        self.pkg_name = '{0}-{1}'.format(self.pkg_info['name'],
+                                        self.pkg_info['version']
         )
 
         self.files = [
             'debian/control',
             'debian/rules',
             'debian/copyright',
-            'debian/changelog'
+            'debian/changelog',
+            'debian/pyversions',
+            'debian/compat'
         ]
 
 
@@ -41,7 +43,7 @@ class DebianPackage(bob.package.BasePackage):
 
         # download tarball
         tarball = self.pkg_info['source']
-        tarball = tarball.replace('$pkgname-$pkgver-$pkgrel', self.pkg_name)
+        tarball = tarball.replace('$pkgname-$pkgver', self.pkg_name)
         target = os.path.join(self.dest, tarball.split('/')[-1])
         urllib.urlretrieve(tarball, target)
 
@@ -54,6 +56,7 @@ class DebianPackage(bob.package.BasePackage):
 
         build_dir = os.path.join(self.dest, self.pkg_name)
         os.mkdir(os.path.join(build_dir, 'debian'))
+        os.mkdir(os.path.join(build_dir, 'debian/source'))
         for file_ in self.files:
             shutil.copy(os.path.join(self.src, file_), os.path.join(build_dir, file_))
 

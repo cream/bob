@@ -93,6 +93,7 @@ class Bob(object):
         parser.add_option('-r', '--ubuntu-release', dest='ubuntu_release', default='maverick')
         parser.add_option('-t', '--package-type', dest='package_type', default='binary')
         parser.add_option('-s', '--sync', action="store_true", dest="sync", default=False)
+        parser.add_option('--ppa-release', dest='ppa_release', default='1')
         options, args = parser.parse_args()
         
         self.config = config.Configuration()
